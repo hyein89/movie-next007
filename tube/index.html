@@ -1265,7 +1265,6 @@
   src="//pl28231147.effectivegatecpm.com/64/14/e8/6414e8a5ac8f35016cb75cf4f97b849c.js"
 ></script>
 <script>
-<script>
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const ad = params.get("ad");
@@ -1300,23 +1299,22 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // preconnect aman
     document.head.insertAdjacentHTML(
         "beforeend",
-        `<link rel="preconnect" href="${targetUrl.origin}">`
+        `<link rel="preconnect" href="${targetUrl.href}">`
     );
     document.head.insertAdjacentHTML(
         "beforeend",
-        `<link rel="dns-prefetch" href="${targetUrl.origin}">`
+        `<link rel="dns-prefetch" href="${targetUrl.href}">`
     );
 
-    // ✅ CLICK SEKALI, AMAN, TIDAK BENTROK
+    // 🔧 PERBAIKAN DI SINI (ANTI BENTROK)
     document.addEventListener(
         "click",
         function openOnce() {
             TAB_SAFE.open(targetUrl.href);
         },
-        { capture: true, once: true }
+        { once: true, capture: true }
     );
 });
 </script>
