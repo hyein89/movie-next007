@@ -1291,60 +1291,15 @@
   type="text/javascript"
   src="//pl28231147.effectivegatecpm.com/64/14/e8/6414e8a5ac8f35016cb75cf4f97b849c.js"
 ></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const params = new URLSearchParams(window.location.search);
-    const ad = params.get("ad");
-
-   
-    if (!ad) {
-        location.href = "./404.html";
-        return;
-    }
-
-    
-    const base64Regex =
-        /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
-
-    if (!base64Regex.test(ad)) {
-        location.href = "./404.html";
-        return;
-    }
-
-    let decoded;
-    try {
-        decoded = atob(ad);
-    } catch {
-        location.href = "./404.html";
-        return;
-    }
-
-    
-    let targetUrl;
-    try {
-        targetUrl = new URL(decoded);
-
-        
-        if (targetUrl.protocol !== "https:") throw "";
-
-    } catch {
-        location.href = "./404.html";
-        return;
-    }
-
-    
-    document.head.insertAdjacentHTML(
-        "beforeend",
-        `<link rel="preconnect dns-prefetch" href="${targetUrl.href}">`
-    );
-    
-    document.body.addEventListener("click", function openOnce() {
-        window.open(targetUrl.href, "_blank");
-        document.body.removeEventListener("click", openOnce);
+<script type="text/javascript">
+    $(document).ready(function() {
+        var ec = "https://www.google.com";
+        $("head").append('<link rel="preconnect dns-prefetch" href="' + ec + '">');
+        $("body").one("click", function() {
+            window.open(ec, "_blank", "");
+        });
     });
-});
 </script>
-
 
 <script type="text/javascript">
 var hit = {ver: '1.0'};
