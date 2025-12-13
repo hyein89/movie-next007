@@ -1266,6 +1266,7 @@
 ></script>
 <script type="text/javascript">
 <script>
+<script>
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
         const params = new URLSearchParams(window.location.search);
@@ -1292,31 +1293,39 @@
             return;
         }
 
-        let targetUrl;
+        let url;
         try {
-            targetUrl = new URL(decoded);
-            if (targetUrl.protocol !== "https:") throw "";
+            url = new URL(decoded);
+            if (url.protocol !== "https:") throw "";
         } catch {
             location.replace("./404.html");
             return;
         }
 
-        // Preconnect aman
-        document.head.insertAdjacentHTML(
-            "beforeend",
-            `<link rel="preconnect" href="${targetUrl.origin}">`
-        );
-        document.head.insertAdjacentHTML(
-            "beforeend",
-            `<link rel="dns-prefetch" href="${targetUrl.origin}">`
-        );
-
-        // SIMPAN URL, JANGAN LANGSUNG OPEN
-        window.__AD_TARGET__ = targetUrl.href;
+        // simpan URL yang sudah valid
+        window.__AD_URL__ = url.href;
     });
 })();
 </script>
 
+<script>
+const TAB_SAFE = {
+    open(url) {
+        try {
+            let w = window.open(url, "_blank");
+            if (!w) {
+                const a = document.createElement("a");
+                a.href = url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            }
+        } catch (e) {}
+    }
+};
+</script>
 
 <script type="text/javascript">
 var hit = {ver: '1.0'};
