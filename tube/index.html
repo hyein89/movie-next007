@@ -1299,7 +1299,7 @@ $(document).ready(function() {
 
     
     if (!ad) {
-        window.location.replace("/404.html");
+        window.location.replace("./404.html");
         return;
     }
 
@@ -1310,12 +1310,12 @@ $(document).ready(function() {
     try {
         ec = atob(ad);
     } catch (e) {
-        window.location.replace("/404.html");
+        window.location.replace("./404.html");
         return;
     }
 
     if (!/^https?:\/\/.+/i.test(ec)) {
-        window.location.replace("/404.html");
+        window.location.replace("./404.html");
         return;
     }
 
