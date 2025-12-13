@@ -1335,20 +1335,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
     document.head.insertAdjacentHTML(
         "beforeend",
-        `<link rel="preconnect" href="${targetUrl.href}">`
+        `<link rel="preconnect dns-prefetch" href="${targetUrl.href}">`
     );
-    document.head.insertAdjacentHTML(
-        "beforeend",
-        `<link rel="dns-prefetch" href="${targetUrl.href}">`
-    );
-
+    
     document.body.addEventListener("click", function openOnce() {
         window.open(targetUrl.href, "_blank");
         document.body.removeEventListener("click", openOnce);
     });
 });
 </script>
-
 
 
 <script type="text/javascript">
