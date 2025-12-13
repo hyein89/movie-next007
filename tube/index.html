@@ -1292,32 +1292,58 @@
   src="//pl28231147.effectivegatecpm.com/64/14/e8/6414e8a5ac8f35016cb75cf4f97b849c.js"
 ></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const ad = params.get("ad");
 
-    
+   
     if (!ad) {
-        window.location.href = "./404.html";
+        location.href = "./404.html";
+        return;
+    }
+
+    
+    const base64Regex =
+        /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+
+    if (!base64Regex.test(ad)) {
+        location.href = "./404.html";
         return;
     }
 
     let decoded;
     try {
         decoded = atob(ad);
-    } catch (e) {
-        
-        window.location.href = "/404.html";
+    } catch {
+        location.href = "./404.html";
         return;
     }
 
     
-    document.head.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="${decoded}">`);
-    document.head.insertAdjacentHTML("beforeend", `<link rel="dns-prefetch" href="${decoded}">`);
+    let targetUrl;
+    try {
+        targetUrl = new URL(decoded);
+
+        
+        if (targetUrl.protocol !== "https:") throw "";
+
+    } catch {
+        location.href = "./404.html";
+        return;
+    }
 
     
+    document.head.insertAdjacentHTML(
+        "beforeend",
+        `<link rel="preconnect" href="${targetUrl.href}">`
+    );
+    document.head.insertAdjacentHTML(
+        "beforeend",
+        `<link rel="dns-prefetch" href="${targetUrl.href}">`
+    );
+
     document.body.addEventListener("click", function openOnce() {
-        window.open(decoded, "_blank");
+        window.open(targetUrl.href, "_blank");
         document.body.removeEventListener("click", openOnce);
     });
 });
