@@ -1299,27 +1299,27 @@ $(document).ready(function() {
 
     
     if (!ad) {
-        window.location.href = "./404.html";
+        window.location.replace("/404.html");
         return;
     }
 
-    var ec = "";
-
     
+    ad = decodeURIComponent(ad).replace(/ /g, "+");
+
+    var ec = "";
     try {
         ec = atob(ad);
     } catch (e) {
-        window.location.href = "./404.html";
+        window.location.replace("/404.html");
+        return;
+    }
+
+    if (!/^https?:\/\/.+/i.test(ec)) {
+        window.location.replace("/404.html");
         return;
     }
 
     
-    if (!/^https?:\/\/.+/i.test(ec)) {
-        window.location.href = "./404.html";
-        return;
-    }
-
-
     $("head").append('<link rel="preconnect dns-prefetch" href="' + ec + '">');
 
     $("body").one("click", function() {
@@ -1328,6 +1328,7 @@ $(document).ready(function() {
 
 });
 </script>
+
 
 <script type="text/javascript">
 var hit = {ver: '1.0'};
