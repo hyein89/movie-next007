@@ -1266,13 +1266,13 @@
 ></script>
 <script type="text/javascript">
 <script>
-<script>
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
         const params = new URLSearchParams(window.location.search);
         const ad = params.get("ad");
 
-        if (!ad) {
+        // 🔒 BLOK: ?ad= , ?ad=   , tanpa ad
+        if (ad === null || ad.trim() === "") {
             location.replace("./404.html");
             return;
         }
@@ -1302,7 +1302,7 @@
             return;
         }
 
-        // simpan URL yang sudah valid
+        // SIMPAN URL VALID
         window.__AD_URL__ = url.href;
     });
 })();
